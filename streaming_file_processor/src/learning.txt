@@ -1,0 +1,31 @@
+Daily Learning – Iterators & Generators
+
+1.  Iterator Protocol
+
+-   An iterator is an object that allows traversal of data one element
+    at a time
+-   Uses iter() and next()
+-   next() fetches next value, StopIteration ends loop
+
+2.  Generators & yield
+
+-   Generators are functions that return values one by one using yield
+-   More memory efficient than normal functions
+-   Execution pauses and resumes
+
+3.  Generator vs Function
+
+-   return → gives all data at once
+-   yield → gives data step-by-step
+
+4.  Streaming File Processing
+
+-   Read large files line by line using generators
+-   Avoid loading entire file into memory
+-   Improves performance and scalability
+
+5.  Key Concepts
+
+-   Memory efficiency
+-   Lazy evaluation
+-   Useful for large data processing, logs, and streaming
