@@ -1,0 +1,5 @@
+
+2026-05-20 15:34:28,837 [INFO] Application started
+2026-05-20 15:34:28,840 [WARNING] Low disk space
+2026-05-20 15:34:28,840 [ERROR] API failed
+2026-05-20 15:34:28,840 [CRITICAL] Server crashed
