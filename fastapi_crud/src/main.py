@@ -1,54 +1,64 @@
-from fastapi import FastAPI
-from src.schemas.task_schema import Task
+from fastapi import FastAPI, HTTPException
+from src.schemas.task_schema import TaskRequest, TaskResponse
 
 app = FastAPI()
 
-# In-memory storage
 tasks = []
+task_counter = 1
 
 
 # CREATE Task
-@app.post("/tasks")
-def create_task(task: Task):
-    tasks.append(task)
-    return {
-        "message": "Task created",
-        "task": task
+@app.post("/tasks", response_model=TaskResponse)
+def create_task(task: TaskRequest):
+
+    global task_counter
+
+    new_task = {
+        "id": task_counter,
+        "title": task.title,
+        "completed": task.completed,
+        "description": task.description
     }
+
+    tasks.append(new_task)
+
+    task_counter += 1
+
+    return new_task
 
 
 # READ All Tasks
-@app.get("/tasks")
+@app.get("/tasks", response_model=list[TaskResponse])
 def get_tasks():
     return tasks
 
 
 # READ Single Task
-@app.get("/tasks/{task_id}")
+@app.get("/tasks/{task_id}", response_model=TaskResponse)
 def get_task(task_id: int):
 
     for task in tasks:
-        if task.id == task_id:
+        if task["id"] == task_id:
             return task
 
-    return {"error": "Task not found"}
+    raise HTTPException(status_code=404, detail="Task not found")
 
 
 # UPDATE Task
-@app.put("/tasks/{task_id}")
-def update_task(task_id: int, updated_task: Task):
+@app.put("/tasks/{task_id}", response_model=TaskResponse)
+def update_task(task_id: int, updated_task: TaskRequest):
 
-    for index, task in enumerate(tasks):
+    for task in tasks:
 
-        if task.id == task_id:
-            tasks[index] = updated_task
+        if task["id"] == task_id:
 
-            return {
-                "message": "Task updated",
-                "task": updated_task
-            }
+            task["title"] = updated_task.title
+            task["completed"] = updated_task.completed
+            task["description"] = updated_task.description
 
-    return {"error": "Task not found"}
+            return task
+
+    raise HTTPException(status_code=404, detail="Task not found")
 
 
 # DELETE Task
@@ -57,7 +67,8 @@ def delete_task(task_id: int):
 
     for index, task in enumerate(tasks):
 
-        if task.id == task_id:
+        if task["id"] == task_id:
+
             deleted_task = tasks.pop(index)
 
             return {
@@ -65,4 +76,4 @@ def delete_task(task_id: int):
                 "task": deleted_task
             }
 
-    return {"error": "Task not found"}
+    raise HTTPException(status_code=404, detail="Task not found")
