@@ -1,10 +1,61 @@
-from fastapi import FastAPI, HTTPException
+import time
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from src.schemas.task_schema import TaskRequest, TaskResponse
 
 app = FastAPI()
 
+# Gloable exception handler
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    return JSONResponse(
+        satus_code=500,
+        content={
+            "success": False,
+            "error": {
+                "message": "Internal server error",
+                "Status code": 500
+            }
+        }
+    )
+
+# Global HTTP Exception Handler for specific HTTP errors like 404, 400, etc
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "success": False,
+            "error": {
+                "message": exc.detail,
+                "status_code": exc.status_code
+            }
+        }
+    )
+
 tasks = []
 task_counter = 1
+
+#middleware to log request details
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    
+    #before request
+    start_time = time.time()
+    print(f"Request: {request.method} {request.url}")
+
+    # forward request to the route
+    response = await call_next(request)
+
+    #after request
+    process_time = time.time() - start_time
+    print(f"Processed in {process_time:.4f} sec")
+    
+    #add custom header to response
+    response.headers["X-Process-Time"] = str(process_time)
+
+    return response
 
 
 # CREATE Task
