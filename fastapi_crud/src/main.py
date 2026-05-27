@@ -1,9 +1,30 @@
 import time
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request , BackgroundTasks
 from fastapi.responses import JSONResponse
 from src.schemas.task_schema import TaskRequest, TaskResponse
 
 app = FastAPI()
+
+# email function to simulate sending email in background
+
+def send_email(email: str):
+
+    print(f"Sending email to {email}...")
+
+    time.sleep(5)
+
+    print("Email sent successfully")
+
+# Add route for email sending
+
+@app.post("/send-email")
+async def send_email_api(email: str, background_tasks: BackgroundTasks):
+
+    background_tasks.add_task(send_email, email)
+
+    return {
+        "message": "Email is being sent in background"
+    }
 
 # Gloable exception handler
 @app.exception_handler(Exception)
