@@ -1,4 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException
+from src.auth.auth_handler import (create_access_token)
+from src.auth.auth_handler import verify_token
+from src.schemas.auth_schema import LoginRequest
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import session
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -10,6 +14,65 @@ from src.database.models import Task
 from src.schemas.task_schema import (TaskRequest,TaskResponse)
 
 app = FastAPI()
+
+# create a fake user for authentication
+
+fake_user = {
+    "username": "admin",
+    "password": "admin123"
+}
+
+# Security Scheme
+
+security = HTTPBearer()
+
+#Add Current User Dependency
+
+async def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+):
+
+    token = credentials.credentials
+
+    payload = verify_token(token)
+
+    if not payload:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token"
+        )
+
+    return payload
+
+
+
+# login endpoint
+
+@app.post("/login")
+async def login(user: LoginRequest):
+
+    #verify user credentials
+    if (
+        user.username != fake_user["username"] or
+        user.password != fake_user["password"]
+    ):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    
+    #generate JWT token
+    
+    access_token = create_access_token(data={"sub": user.username})
+
+    return {"access_token": access_token, "token_type": "bearer"}
+
+# Protected route 
+
+@app.get("/protected")
+async def protected_route(user=Depends(get_current_user)):
+    return {
+        "message": "Protected route accessed",
+        "user": user
+    }
 
 # Create tables on startup
 
@@ -38,10 +101,7 @@ async def get_db():
 #create task
 
 @app.post("/tasks", response_model=TaskResponse)
-async def create_task(
-    task: TaskRequest,
-    db: AsyncSession = Depends(get_db)
-):
+async def create_task(task: TaskRequest, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
     new_task = Task(
         title = task.title,
         completed = task.completed
@@ -57,13 +117,13 @@ async def create_task(
 
 #read all tasks
 @app.get("/tasks", response_model=list[TaskResponse])
-async def get_tasks(db: AsyncSession = Depends(get_db)):
+async def get_tasks(db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
     result = await db.execute(select(Task))
     return result.scalars().all()
 
 #update task
 @app.put("/tasks/{task_id}", response_model=TaskResponse)
-async def update_task(task_id: int, updated_task: TaskRequest, db: AsyncSession = Depends(get_db)):
+async def update_task(task_id: int, updated_task: TaskRequest, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
     
     result = await db.execute(select(task).filter(task.id == task_id))
     task = result.scalar_one_or_none()
@@ -83,7 +143,7 @@ async def update_task(task_id: int, updated_task: TaskRequest, db: AsyncSession 
 
 #delete task
 @app.delete("/tasks/{task_id}")
-async def delete_task(task_id: int, db: AsyncSession = Depends(get_db)):
+async def delete_task(task_id: int, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
 
     result = await db.execute(select(Task).filter(Task.id == task_id))
     task = result.scalar_one_or_none()
