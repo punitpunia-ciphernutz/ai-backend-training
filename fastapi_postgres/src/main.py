@@ -18,7 +18,7 @@ from src.database.connection import (engine, session_local, Base)
 
 from src.database.models import Task
 
-from src.schemas.task_schema import (TaskRequest,TaskResponse)
+from src.schemas.task_schema import (TaskRequest, TaskResponse)
 
 from fastapi import (UploadFile, File)
 
@@ -27,8 +27,6 @@ import os
 from fastapi import (UploadFile, File)
 
 import uuid
-
-
 
 
 app = FastAPI()
@@ -44,7 +42,8 @@ fake_user = {
 
 security = HTTPBearer()
 
-#Add Current User Dependency
+# Add Current User Dependency
+
 
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security)
@@ -64,26 +63,26 @@ async def get_current_user(
     return payload
 
 
-
 # login endpoint
 
 @app.post("/login")
 async def login(user: LoginRequest):
 
-    #verify user credentials
+    # verify user credentials
     if (
         user.username != fake_user["username"] or
         user.password != fake_user["password"]
     ):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    
-    #generate JWT token
-    
+
+    # generate JWT token
+
     access_token = create_access_token(data={"sub": user.username})
 
     return {"access_token": access_token, "token_type": "bearer"}
 
-# Protected route 
+# Protected route
+
 
 @app.get("/protected")
 async def protected_route(user=Depends(get_current_user)):
@@ -93,6 +92,7 @@ async def protected_route(user=Depends(get_current_user)):
     }
 
 # Create tables on startup
+
 
 @app.on_event("startup")
 async def startup():
@@ -107,7 +107,8 @@ ALLOWED_FILE_TYPES = [
 ]
 
 MAX_FILE_SIZE = 5 * 1024 * 1024
-#create tabels
+# create tabels
+
 
 async def create_tables():
 
@@ -118,18 +119,20 @@ async def create_tables():
         )
 
 # Dependency to get DB session
+
+
 async def get_db():
     async with session_local() as db:
         yield db
 
 
-#create task
+# create task
 
 @app.post("/tasks", response_model=TaskResponse)
 async def create_task(task: TaskRequest, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
     new_task = Task(
-        title = task.title,
-        completed = task.completed
+        title=task.title,
+        completed=task.completed
     )
 
     db.add(new_task)
@@ -140,24 +143,28 @@ async def create_task(task: TaskRequest, db: AsyncSession = Depends(get_db), use
 
     return new_task
 
-#read all tasks
+# read all tasks
+
+
 @app.get("/tasks", response_model=list[TaskResponse])
 async def get_tasks(db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
     result = await db.execute(select(Task))
     return result.scalars().all()
 
-#update task
+# update task
+
+
 @app.put("/tasks/{task_id}", response_model=TaskResponse)
 async def update_task(task_id: int, updated_task: TaskRequest, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
-    
+
     result = await db.execute(select(task).filter(task.id == task_id))
     task = result.scalar_one_or_none()
 
     # check if task exists
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
-    
-    #update task
+
+    # update task
     task.title = updated_task.title
     task.completed = updated_task.completed
 
@@ -166,7 +173,9 @@ async def update_task(task_id: int, updated_task: TaskRequest, db: AsyncSession 
 
     return task
 
-#delete task
+# delete task
+
+
 @app.delete("/tasks/{task_id}")
 async def delete_task(task_id: int, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
 
@@ -176,14 +185,14 @@ async def delete_task(task_id: int, db: AsyncSession = Depends(get_db), user=Dep
     # check if task exists
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
-    
+
     await db.delete(task)
     await db.commit()
 
     return {"detail": "Task deleted successfully"}
 
 
-#file upload endpoint
+# file upload endpoint
 @app.post("/upload")
 async def upload_file(
     file: UploadFile = File(...)
@@ -237,7 +246,3 @@ async def upload_file(
         "content_type": file.content_type,
         "size": len(content)
     }
-
-
-
-
