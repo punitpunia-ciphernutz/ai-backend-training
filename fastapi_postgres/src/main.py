@@ -1,10 +1,17 @@
 from fastapi import FastAPI, Depends, HTTPException
+
 from src.auth.auth_handler import (create_access_token)
+
 from src.auth.auth_handler import verify_token
+
 from src.schemas.auth_schema import LoginRequest
+
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
 from sqlalchemy.orm import session
+
 from sqlalchemy import select
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database.connection import (engine, session_local, Base)
@@ -12,6 +19,17 @@ from src.database.connection import (engine, session_local, Base)
 from src.database.models import Task
 
 from src.schemas.task_schema import (TaskRequest,TaskResponse)
+
+from fastapi import (UploadFile, File)
+
+import os
+
+from fastapi import (UploadFile, File)
+
+import uuid
+
+
+
 
 app = FastAPI()
 
@@ -81,7 +99,14 @@ async def startup():
 
     await create_tables()
 
+# file types allowed for upload
+ALLOWED_FILE_TYPES = [
+    "image/jpeg",
+    "image/png",
+    "application/pdf"
+]
 
+MAX_FILE_SIZE = 5 * 1024 * 1024
 #create tabels
 
 async def create_tables():
@@ -158,8 +183,60 @@ async def delete_task(task_id: int, db: AsyncSession = Depends(get_db), user=Dep
     return {"detail": "Task deleted successfully"}
 
 
+#file upload endpoint
+@app.post("/upload")
+async def upload_file(
+    file: UploadFile = File(...)
+):
 
+    # Validate MIME type
+    if file.content_type not in ALLOWED_FILE_TYPES:
 
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid file type"
+        )
+
+    # Read file content
+    content = await file.read()
+
+    # Validate file size
+    if len(content) > MAX_FILE_SIZE:
+
+        raise HTTPException(
+            status_code=400,
+            detail="File too large"
+        )
+
+    # Create uploads directory
+    os.makedirs(
+        "storage/uploads",
+        exist_ok=True
+    )
+
+    # Generate safe unique filename
+
+    unique_filename = (
+        f"{uuid.uuid4()}.{file_extension}"
+    )
+
+    # Safe file path
+    file_path = (
+        f"storage/uploads/{unique_filename}"
+    )
+
+    # Store file locally
+    with open(file_path, "wb") as buffer:
+
+        buffer.write(content)
+
+    return {
+        "message": "File uploaded successfully",
+        "original_filename": file.filename,
+        "stored_filename": unique_filename,
+        "content_type": file.content_type,
+        "size": len(content)
+    }
 
 
 
