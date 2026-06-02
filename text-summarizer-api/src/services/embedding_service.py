@@ -2,6 +2,7 @@ import os
 import json
 import google.generativeai as genai
 import numpy as np
+from src.db.chroma_client import collection
 from src.core.config import GEMINI_API_KEY  
 
 genai.configure(api_key=GEMINI_API_KEY)
@@ -29,23 +30,18 @@ async def generate_embedding(text: str):
 #Store Embedding Locally
 
 async def save_embedding(text: str):
-    embedding = await generate_embedding(text)
-    record = {
-        "text": text,
-        "embedding": embedding
-    }
-    data = []
-    if os.path.exists(EMBEDDING_FILE):
-        with open(EMBEDDING_FILE,"r") as f:
-            try:
-                data = json.load(f)
-            except:
-                data = []
-    data.append(record)
-    with open(EMBEDDING_FILE,"w") as f:
-        json.dump(data,f,indent=2)
 
-    return record
+    embedding = await generate_embedding(text)
+
+    collection.add(
+        ids=[str(hash(text))],
+        documents=[text],
+        embeddings=[embedding]
+    )
+
+    return {
+        "message": "Stored successfully"
+    }
 
 #Load Stored Embeddings
 
@@ -60,25 +56,9 @@ async def similarity_search(query: str):
 
     query_embedding = await generate_embedding(query)
 
-    records = await load_embeddings()
+    results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=1
+    )
 
-    best_score = -1
-    best_match = None
-
-    for record in records:
-
-        score = cosine_similarity(
-            query_embedding,
-            record["embedding"]
-        )
-
-        if score > best_score:
-
-            best_score = score
-            best_match = record
-
-    return {
-        "query": query,
-        "score": best_score,
-        "match": best_match["text"]
-    }
+    return results
