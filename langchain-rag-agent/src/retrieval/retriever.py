@@ -10,5 +10,9 @@ vectorstore = Chroma(
 
 
 retriever = vectorstore.as_retriever(
-    search_kwargs={"k": 3}
+    search_type="mmr",
+    search_kwargs={
+        "k": 5,
+        "fetch_k": 20
+    }
 )

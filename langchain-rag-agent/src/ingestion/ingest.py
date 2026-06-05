@@ -19,6 +19,12 @@ def ingest():
 
     docs = splitter.create_documents([text])
 
+    for doc in docs:
+        doc.metadata = {
+            "source": "notes.txt",
+            "topic": "jwt"
+        }
+
     Chroma.from_documents(
         docs,
         embeddings,
