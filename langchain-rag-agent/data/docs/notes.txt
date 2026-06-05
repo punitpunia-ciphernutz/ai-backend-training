@@ -1,0 +1,10 @@
+JWT stands for JSON Web Token.
+
+JWT contains:
+Header
+Payload
+Signature
+
+JWT is used for authentication.
+
+FastAPI supports JWT authentication.
