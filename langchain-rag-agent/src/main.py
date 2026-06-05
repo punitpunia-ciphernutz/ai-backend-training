@@ -22,10 +22,14 @@ def main():
             }
         )
 
-        print(
-            "\nAssistant:",
-            response["output"]
-        )
+        raw_output = response.get("output")
+
+        if isinstance(raw_output, list) and len(raw_output) > 0:
+            clean_text = raw_output[0].get("text", "")
+        else:
+            clean_text = raw_output
+
+        print("\nAssistant:", clean_text)
         
 
 

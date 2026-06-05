@@ -6,7 +6,15 @@ from src.retrieval.retriever import retriever
 def search_docs(query: str):
 
     """
-    Search documents.
+    Search the knowledge base and retrieve information from stored documents.
+
+    MUST be used for:
+    - JWT questions
+    - FastAPI questions
+    - Course notes
+    - Any factual question about stored documents
+
+    Use this before answering.
     """
 
     docs = retriever.invoke(query)

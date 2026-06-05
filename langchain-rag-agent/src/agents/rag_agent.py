@@ -9,8 +9,8 @@ from src.memory.chat_memory import memory
 
 
 tools = [
-    calculator,
-    search_docs
+    search_docs,
+    calculator
 ]
 
 prompt = ChatPromptTemplate.from_messages(
