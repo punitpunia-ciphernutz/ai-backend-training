@@ -12,7 +12,7 @@ def main():
             break
 
         response = chat(
-            questionw
+            question
         )
 
         print(
