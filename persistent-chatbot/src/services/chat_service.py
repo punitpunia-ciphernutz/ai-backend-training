@@ -3,6 +3,7 @@ from src.chains.chat_chain import chat_chain
 from src.tracking.token_tracker import (extract_usage)
 from src.tracking.cost_calculator import (calculate_cost)
 from src.database.token_service import (save_token_usage)
+import time
 
 def chat(question):
 
@@ -11,11 +12,47 @@ def chat(question):
     messages = get_messages()
 
     for msg in messages:
-
+        
         history += (
             f"{msg.role}: "
             f"{msg.content}\n"
         )
+    
+
+    response_chunks = []
+
+    for chunk in chat_chain.stream(
+        {
+            "history": history,
+            "question": question
+        }
+    ):
+
+        if isinstance(chunk.content, list):
+            for item in chunk.content:
+                text = item.get("text", "")
+
+                print(
+                    text,
+                    end="",
+                    flush=True
+                )
+                time.sleep(0.9)
+
+            response_chunks.append(text)
+
+        else:
+            print(
+            chunk.content,
+            end="",
+            flush=True
+        )
+
+            response_chunks.append(str(chunk.content))
+
+        print()
+
+        response_text = "".join(response_chunks)
 
     response = chat_chain.invoke(
         {
@@ -23,7 +60,7 @@ def chat(question):
             "question": question
         }
     )
-    
+
     usage = extract_usage(response)
 
     cost = calculate_cost(
@@ -62,9 +99,6 @@ def chat(question):
         # Fallback in case the structure varies unexpectedly
         ai_text = str(response.content)
 
-    save_message(
-        "assistant",
-        ai_text
-    )
+    save_message("assistant", response_text)
 
-    return ai_text
+    return response_text
