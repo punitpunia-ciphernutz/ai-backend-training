@@ -1,7 +1,3 @@
-from src.core.llm import llm
+from src.core.logger import logger
 
-response = llm.invoke("Hello")
-
-print(type(response))
-print(response)
-print(response.usage_metadata)
+logger.info("Application started")

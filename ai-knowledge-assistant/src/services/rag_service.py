@@ -14,7 +14,7 @@ from src.services.chat_history_service import (
     get_chat_history,
     format_chat_history
 )
-
+from src.core.logger import logger
 
 async def ask_question(
     db: Session,
@@ -37,6 +37,8 @@ async def ask_question(
     history = format_chat_history(
         messages
     )
+    
+    logger.info(f"Chat request user_id={user_id}")
 
     response = await rag_message_chain.ainvoke(
     {
@@ -53,6 +55,8 @@ async def ask_question(
     )
 
     answer = response.text
+
+    logger.info(f"Chat completed user_id={user_id}")
     
     save_message(
         db,
@@ -90,7 +94,7 @@ async def stream_answer(
             "history": history
         }
     ):
-        print("CHUNK:", chunk)
+        
 
         if chunk.content and len(chunk.content) > 0:
 

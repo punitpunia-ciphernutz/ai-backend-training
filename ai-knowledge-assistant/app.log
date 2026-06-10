@@ -1,0 +1,6 @@
+2026-06-10 16:19:00,814 - INFO - Application started
+2026-06-10 16:19:32,408 - INFO - Application started
+2026-06-10 16:39:03,088 - INFO - User logged in: test@gmail.com
+2026-06-10 16:39:34,180 - INFO - Chat request user_id=4
+2026-06-10 16:39:35,472 - INFO - Token usage user_id=4 input=823 output=6 total=829
+2026-06-10 16:39:35,472 - INFO - Chat completed user_id=4

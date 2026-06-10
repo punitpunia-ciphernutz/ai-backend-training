@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-
+from src.core.logger import logger
 from src.models.token_log import TokenLog
 
 INPUT_TOKEN_PRICE = 0.0
@@ -58,5 +58,11 @@ def save_token_usage(
 
     db.add(log)
     db.commit()
+    logger.info(
+    f"Token usage user_id={user_id} "
+    f"input={input_tokens} "
+    f"output={output_tokens} "
+    f"total={total_tokens}"
+)
 
     return log

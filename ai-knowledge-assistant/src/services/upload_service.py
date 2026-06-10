@@ -5,7 +5,7 @@ from src.ingestion.chunker import chunk_text
 from src.vectorstore.chroma_store import (
     vector_db
 )
-
+from src.core.logger import logger
 
 def upload_document(file):
 
@@ -16,6 +16,7 @@ def upload_document(file):
     vector_db.add_documents(
         docs
     )
+    logger.info(f"Document uploaded: {file.filename}")
 
     return {
         "chunks": len(docs),

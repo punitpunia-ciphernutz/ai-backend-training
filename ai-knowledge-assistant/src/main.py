@@ -1,4 +1,4 @@
-from src.core.config import *
+from src.core.config import settings
 from fastapi import FastAPI
 from src.api.auth import router
 from src.core.database import (Base,engine)

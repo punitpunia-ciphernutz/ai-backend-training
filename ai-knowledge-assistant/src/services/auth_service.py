@@ -3,7 +3,8 @@ from src.core.database import SessionLocal
 from src.core.security import (hash_password,create_token)
 from src.core.security import verify_password
 from fastapi import HTTPException
- 
+from src.core.logger import logger
+
 def register_user(data):
 
     db = SessionLocal()
@@ -29,6 +30,8 @@ def register_user(data):
 
     db.commit()
 
+    logger.info(f"User registered: {user.email}")
+
     db.close()
 
     return {"message": "registered"}
@@ -41,6 +44,8 @@ def login_user(user):
             "sub": user.email
         }
     )
+
+    logger.info(f"User logged in: {user.email}")
 
     return {
         "access_token": token,
@@ -58,6 +63,9 @@ def authenticate_user(data):
     )
 
     if not user:
+        
+        logger.warning(f"Failed login attempt: {data.email}")
+        
         raise HTTPException(
             status_code=401,
             detail="Invalid credentials"
@@ -67,6 +75,8 @@ def authenticate_user(data):
         data.password,
         user.password
     ):
+        logger.warning(f"Failed login attempt: {data.email}")
+        
         raise HTTPException(
             status_code=401,
             detail="Invalid credentials"
