@@ -8,6 +8,7 @@ from src.api.upload import (
 from src.api.chat import (
     router as chat_router
 )
+from src.models.token_log import TokenLog
 
 app = FastAPI()
 

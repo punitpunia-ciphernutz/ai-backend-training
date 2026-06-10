@@ -25,3 +25,15 @@ rag_chain = (
     | llm
     | StrOutputParser()
 )
+
+rag_message_chain = (
+    {
+        "context": lambda x: format_docs(
+            retriever.invoke(x["question"])
+        ),
+        "question": lambda x: x["question"],
+        "history": lambda x: x["history"]
+    }
+    | rag_prompt
+    | llm
+)

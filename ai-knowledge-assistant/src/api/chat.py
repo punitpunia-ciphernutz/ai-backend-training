@@ -9,6 +9,8 @@ from src.services.rag_service import (
     ask_question
 )
 
+from src.models.token_log import TokenLog
+
 router = APIRouter()
 
 
@@ -28,3 +30,19 @@ async def chat(
     return {
         "answer": answer
     }
+
+@router.get("/usage")
+async def usage(
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+
+    logs = (
+        db.query(TokenLog)
+        .filter(
+            TokenLog.user_id == current_user.id
+        )
+        .all()
+    )
+
+    return logs
