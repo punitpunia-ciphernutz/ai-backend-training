@@ -37,3 +37,17 @@ rag_message_chain = (
     | rag_prompt
     | llm
 )
+
+rag_stream_chain = (
+    {
+        "context": lambda x: format_docs(
+            retriever.invoke(
+                x["question"]
+            )
+        ),
+        "question": lambda x: x["question"],
+        "history": lambda x: x["history"]
+    }
+    | rag_prompt
+    | llm
+)

@@ -8,8 +8,12 @@ from src.core.security import get_current_user
 from src.services.rag_service import (
     ask_question
 )
+from fastapi.responses import StreamingResponse
 
 from src.models.token_log import TokenLog
+from src.services.rag_service import (
+    stream_answer
+)
 
 router = APIRouter()
 
@@ -46,3 +50,19 @@ async def usage(
     )
 
     return logs
+
+@router.post("/chat/stream")
+async def chat_stream(
+    question: str,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+
+    return StreamingResponse(
+        stream_answer(
+            db=db,
+            user_id=current_user.id,
+            question=question
+        ),
+        media_type="text/event-stream"
+    )
