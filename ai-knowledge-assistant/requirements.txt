@@ -34,6 +34,7 @@ hf-xet==1.5.1
 httpcore==1.0.9
 httptools==0.8.0
 httpx==0.28.1
+httpx-sse==0.4.3
 huggingface_hub==1.18.0
 humanfriendly==10.0
 idna==3.18
@@ -45,9 +46,12 @@ jsonschema-specifications==2025.9.1
 kubernetes==36.0.2
 langchain==1.3.4
 langchain-chroma==1.1.0
+langchain-classic==1.0.7
+langchain-community==0.4.2
 langchain-core==1.4.2
 langchain-google-genai==4.2.4
 langchain-protocol==0.0.16
+langchain-text-splitters==1.1.2
 langgraph==1.2.4
 langgraph-checkpoint==4.1.1
 langgraph-prebuilt==1.1.0
@@ -71,6 +75,7 @@ orjson==3.11.9
 ormsgpack==1.12.2
 overrides==7.7.0
 packaging==26.2
+passlib==1.7.4
 propcache==0.5.2
 protobuf==6.33.6
 pyasn1==0.6.3
