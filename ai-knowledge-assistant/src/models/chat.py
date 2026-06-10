@@ -1,6 +1,13 @@
-from sqlalchemy import Column, Integer, Text, String
+from datetime import datetime
 
-from src.database.db import Base
+from sqlalchemy import Column
+from sqlalchemy import DateTime
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import Text
+
+from src.core.database import Base
 
 
 class ChatMessage(Base):
@@ -13,6 +20,23 @@ class ChatMessage(Base):
         index=True
     )
 
-    role = Column(String)
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id")
+    )
 
-    content = Column(Text)
+    role = Column(
+        String,
+        nullable=False
+    )
+
+    content = Column(
+        Text,
+        nullable=False
+    )
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow 
+    )
+

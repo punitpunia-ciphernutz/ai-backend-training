@@ -15,8 +15,11 @@ def format_docs(docs):
 
 rag_chain = (
     {
-        "context": retriever | format_docs,
-        "question": RunnablePassthrough()
+        "context": lambda x: format_docs(
+            retriever.invoke(x["question"])
+        ),
+        "question": lambda x: x["question"],
+        "history": lambda x: x["history"]
     }
     | rag_prompt
     | llm
