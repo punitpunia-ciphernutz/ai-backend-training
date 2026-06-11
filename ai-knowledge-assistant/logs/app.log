@@ -23,3 +23,8 @@
 2026-06-11 09:47:39,107 - INFO - Chat completed user_id=1
 2026-06-11 09:48:10,939 - INFO - Cache HIT: what is fastapi?
 2026-06-11 09:48:10,949 - INFO - Cache HIT user_id=1
+2026-06-11 10:44:20,443 - INFO - User logged in: test@gmail.com
+2026-06-11 10:44:52,603 - INFO - Embedding Cache MISS
+2026-06-11 10:44:58,016 - INFO - Document uploaded: demo.txt
+2026-06-11 10:45:03,321 - INFO - Embedding Cache HIT
+2026-06-11 10:45:03,352 - INFO - Document uploaded: demo.txt

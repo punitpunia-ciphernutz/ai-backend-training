@@ -1,5 +1,5 @@
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-
-embeddings = GoogleGenerativeAIEmbeddings(
-    model="models/gemini-embedding-2"
+from src.core.cached_embeddings import (
+    CachedEmbeddings
 )
+
+embeddings = CachedEmbeddings()
