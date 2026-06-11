@@ -9,8 +9,18 @@ from src.api.chat import (
     router as chat_router
 )
 from src.models.token_log import TokenLog
+from src.core.cache import cache
 
 app = FastAPI()
+
+cache.set(
+    "redis_test",
+    "working"
+)
+
+print(
+    cache.get("redis_test")
+)
 
 Base.metadata.create_all(bind=engine)
 
