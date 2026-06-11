@@ -26,15 +26,48 @@ async def rate_limit_middleware(
 
     key = f"rate_limit:{auth_header}"
 
-    current = cache.get(key)
+    try:
+
+        current = cache.get(key)
+
+    except Exception as e:
+
+        logger.exception(
+            {
+                "event": "rate_limit_redis_error",
+                "error": str(e)
+            }
+        )
+
+        return await call_next(
+            request
+        )
 
     if current is None:
 
-        cache.set(
-            key,
-            1,
-            ex=WINDOW
-        )
+        try:
+
+            cache.set(
+                key,
+                1,
+                ex=WINDOW
+            )
+
+            logger.info(
+                {
+                    "event": "rate_limit_initialized",
+                    "key": key
+                }
+            )
+
+        except Exception as e:
+
+            logger.exception(
+                {
+                    "event": "rate_limit_redis_error",
+                    "error": str(e)
+                }
+            )
 
     else:
 
@@ -43,18 +76,42 @@ async def rate_limit_middleware(
         if current >= RATE_LIMIT:
 
             logger.warning(
-                f"Rate limit exceeded: {key}"
+                {
+                    "event": "rate_limit_exceeded",
+                    "key": key,
+                    "current_requests": current,
+                    "limit": RATE_LIMIT
+                }
             )
 
             return JSONResponse(
                 status_code=429,
                 content={
-                    "detail":
-                    "Rate limit exceeded"
+                    "detail": "Rate limit exceeded"
                 }
             )
 
-        cache.incr(key)
+        try:
+
+            cache.incr(key)
+
+            logger.info(
+                {
+                    "event": "rate_limit_increment",
+                    "key": key,
+                    "current_requests": current + 1,
+                    "limit": RATE_LIMIT
+                }
+            )
+
+        except Exception as e:
+
+            logger.exception(
+                {
+                    "event": "rate_limit_redis_error",
+                    "error": str(e)
+                }
+            )
 
     return await call_next(
         request

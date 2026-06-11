@@ -1,18 +1,37 @@
 from src.core.cache import cache
 from src.core.logger import logger
 
+
 def get_cached_response(question):
 
-    response = cache.get(f"chat:{question}")
+    try:
+
+        response = cache.get(
+            f"chat:{question}"
+        )
+
+    except Exception as e:
+
+        logger.exception(
+            {
+                "event": "redis_read_error",
+                "error": str(e)
+            }
+        )
+
+        return None
 
     if response:
+
         logger.info(
             {
                 "event": "cache_hit",
                 "question": question
             }
         )
+
     else:
+
         logger.info(
             {
                 "event": "cache_miss",
@@ -28,8 +47,19 @@ def set_cached_response(
     answer: str
 ):
 
-    cache.set(
-        f"chat:{question}",
-        answer,
-        ex=3600
-    )
+    try:
+
+        cache.set(
+            f"chat:{question}",
+            answer,
+            ex=3600
+        )
+
+    except Exception as e:
+
+        logger.exception(
+            {
+                "event": "redis_write_error",
+                "error": str(e)
+            }
+        )

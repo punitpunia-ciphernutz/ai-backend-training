@@ -1,9 +1,15 @@
 from sqlalchemy.orm import Session
 
-from src.chains.rag_chain import (rag_message_chain)
-from src.chains.rag_chain import (rag_stream_chain)
+from src.chains.rag_chain import (
+    rag_message_chain
+)
+from src.chains.rag_chain import (
+    rag_stream_chain
+)
 
-from src.services.token_service import (save_token_usage)
+from src.services.token_service import (
+    save_token_usage
+)
 
 from src.services.chat_history_service import (
     save_message,
@@ -80,12 +86,27 @@ async def ask_question(
         }
     )
 
-    response = await rag_message_chain.ainvoke(
-        {
-            "question": question,
-            "history": history
-        }
-    )
+    try:
+
+        response = await rag_message_chain.ainvoke(
+            {
+                "question": question,
+                "history": history
+            }
+        )
+
+    except Exception as e:
+
+        logger.exception(
+            {
+                "event": "llm_error",
+                "user_id": user_id,
+                "question": question,
+                "error": str(e)
+            }
+        )
+
+        raise
 
     save_token_usage(
         db=db,
@@ -95,10 +116,22 @@ async def ask_question(
 
     answer = response.text
 
-    set_cached_response(
-        question,
-        answer
-    )
+    try:
+
+        set_cached_response(
+            question,
+            answer
+        )
+
+    except Exception as e:
+
+        logger.exception(
+            {
+                "event": "cache_write_error",
+                "user_id": user_id,
+                "error": str(e)
+            }
+        )
 
     save_message(
         db,
@@ -141,23 +174,38 @@ async def stream_answer(
 
     full_answer = ""
 
-    async for chunk in rag_stream_chain.astream(
-        {
-            "question": question,
-            "history": history
-        }
-    ):
+    try:
 
-        if chunk.content and len(chunk.content) > 0:
+        async for chunk in rag_stream_chain.astream(
+            {
+                "question": question,
+                "history": history
+            }
+        ):
 
-            text = chunk.content[0].get(
-                "text",
-                ""
-            )
+            if chunk.content and len(chunk.content) > 0:
 
-            full_answer += text
+                text = chunk.content[0].get(
+                    "text",
+                    ""
+                )
 
-            yield f"data: {text}\n\n"
+                full_answer += text
+
+                yield f"data: {text}\n\n"
+
+    except Exception as e:
+
+        logger.exception(
+            {
+                "event": "stream_error",
+                "user_id": user_id,
+                "question": question,
+                "error": str(e)
+            }
+        )
+
+        yield "data: Stream Error\n\n"
 
     save_message(
         db,

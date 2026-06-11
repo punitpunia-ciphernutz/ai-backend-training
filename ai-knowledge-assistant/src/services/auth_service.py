@@ -1,9 +1,14 @@
+from fastapi import HTTPException
+
 from src.models.user import User
 from src.core.database import SessionLocal
-from src.core.security import (hash_password,create_token)
-from src.core.security import verify_password
-from fastapi import HTTPException
+from src.core.security import (
+    hash_password,
+    create_token,
+    verify_password
+)
 from src.core.logger import logger
+
 
 def register_user(data):
 
@@ -16,6 +21,15 @@ def register_user(data):
     )
 
     if existing_user:
+
+        logger.warning(
+            {
+                "event": "registration_failed",
+                "email": data.email,
+                "reason": "email_already_exists"
+            }
+        )
+
         raise HTTPException(
             status_code=400,
             detail="Email already registered"
@@ -26,20 +40,38 @@ def register_user(data):
         password=hash_password(data.password)
     )
 
-    db.add(user)
+    try:
 
-    db.commit()
+        db.add(user)
 
-    logger.info(
-        {
-            "event": "user_registered",
-            "email": data.email
-        }
-    )
+        db.commit()
 
-    db.close()
+        logger.info(
+            {
+                "event": "user_registered",
+                "email": data.email
+            }
+        )
 
-    return {"message": "registered"}
+    except Exception as e:
+
+        logger.exception(
+            {
+                "event": "registration_error",
+                "email": data.email,
+                "error": str(e)
+            }
+        )
+
+        raise
+
+    finally:
+
+        db.close()
+
+    return {
+        "message": "registered"
+    }
 
 
 def login_user(user):
@@ -62,26 +94,41 @@ def login_user(user):
         "token_type": "bearer"
     }
 
+
 def authenticate_user(data):
 
     db = SessionLocal()
 
-    user = (
-        db.query(User)
-        .filter(User.email == data.email)
-        .first()
-    )
+    try:
 
-    if not user:
-        
-        logger.warning(
+        user = (
+            db.query(User)
+            .filter(User.email == data.email)
+            .first()
+        )
+
+    except Exception as e:
+
+        logger.exception(
             {
-                "event": "registration_failed",
+                "event": "login_error",
                 "email": data.email,
-                "reason": "email_already_exists"
+                "error": str(e)
             }
         )
-        
+
+        raise
+
+    if not user:
+
+        logger.warning(
+            {
+                "event": "login_failed",
+                "email": data.email,
+                "reason": "user_not_found"
+            }
+        )
+
         raise HTTPException(
             status_code=401,
             detail="Invalid credentials"
@@ -91,6 +138,7 @@ def authenticate_user(data):
         data.password,
         user.password
     ):
+
         logger.warning(
             {
                 "event": "login_failed",
@@ -98,12 +146,12 @@ def authenticate_user(data):
                 "reason": "invalid_credentials"
             }
         )
-        
+
         raise HTTPException(
             status_code=401,
             detail="Invalid credentials"
         )
-    
+
     db.close()
 
     return login_user(user)

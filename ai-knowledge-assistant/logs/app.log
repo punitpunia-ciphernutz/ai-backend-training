@@ -85,3 +85,124 @@
 2026-06-11 12:50:19,173 - INFO - Chat completed user_id=1
 2026-06-11 12:50:56,271 - INFO - Cache HIT: hello
 2026-06-11 12:50:56,279 - INFO - Cache HIT user_id=1
+2026-06-11 14:32:42,005 - INFO - LLM initialized with retry and fallback support
+2026-06-11 14:33:19,395 - INFO - {'event': 'user_login', 'email': 'test@gmail.com'}
+2026-06-11 14:33:56,862 - INFO - Embedding Cache MISS
+2026-06-11 14:33:58,536 - INFO - {'event': 'document_uploaded', 'filename': 'demo.txt', 'chunks': 1}
+2026-06-11 14:34:10,267 - INFO - {'event': 'cache_miss', 'question': 'hello'}
+2026-06-11 14:34:10,269 - INFO - {'event': 'cache_miss', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:10,269 - INFO - {'event': 'chat_request', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:10,277 - INFO - Embedding Cache MISS
+2026-06-11 14:34:11,782 - INFO - {'event': 'token_usage', 'user_id': 1, 'input_tokens': 1026, 'output_tokens': 13, 'total_tokens': 1039}
+2026-06-11 14:34:11,787 - INFO - {'event': 'chat_completed', 'user_id': 1}
+2026-06-11 14:34:13,150 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:13,157 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:54,806 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:54,813 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:55,323 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:55,328 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:55,547 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:55,552 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:55,805 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:55,809 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:56,017 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:56,022 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:56,245 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:56,250 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:56,535 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:56,540 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:56,797 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:56,805 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:59,241 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:59,249 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:59,570 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:59,578 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:34:59,973 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:34:59,981 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:35:00,496 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:35:00,506 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:35:00,911 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:35:00,915 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:35:01,306 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:35:01,317 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:35:01,615 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:35:01,623 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:35:01,962 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:35:01,967 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:35:02,191 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:35:02,195 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:35:02,487 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:35:02,492 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:35:02,723 - WARNING - Rate limit exceeded: rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NDc5OX0.xJIxnj7Iu6l5Em2_waYX7EfmZC2pXX0ZsiSWY4i1wBk
+2026-06-11 14:35:02,987 - WARNING - Rate limit exceeded: rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NDc5OX0.xJIxnj7Iu6l5Em2_waYX7EfmZC2pXX0ZsiSWY4i1wBk
+2026-06-11 14:54:16,896 - INFO - LLM initialized with retry and fallback support
+2026-06-11 14:55:06,311 - INFO - {'event': 'user_login', 'email': 'test@gmail.com'}
+2026-06-11 14:55:59,411 - INFO - Embedding Cache MISS
+2026-06-11 14:56:01,638 - INFO - {'event': 'document_uploaded', 'filename': 'demo.txt', 'chunks': 1}
+2026-06-11 14:56:14,920 - INFO - {'event': 'rate_limit_initialized', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ'}
+2026-06-11 14:56:14,938 - INFO - {'event': 'cache_miss', 'question': 'hello'}
+2026-06-11 14:56:14,941 - INFO - {'event': 'cache_miss', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:14,941 - INFO - {'event': 'chat_request', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:14,948 - INFO - Embedding Cache MISS
+2026-06-11 14:56:16,622 - INFO - {'event': 'token_usage', 'user_id': 1, 'input_tokens': 1426, 'output_tokens': 13, 'total_tokens': 1439}
+2026-06-11 14:56:16,627 - INFO - {'event': 'chat_completed', 'user_id': 1}
+2026-06-11 14:56:17,405 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 2, 'limit': 20}
+2026-06-11 14:56:17,415 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:17,421 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:17,572 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 3, 'limit': 20}
+2026-06-11 14:56:17,581 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:17,586 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:17,723 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 4, 'limit': 20}
+2026-06-11 14:56:17,737 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:17,742 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:17,886 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 5, 'limit': 20}
+2026-06-11 14:56:17,903 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:17,910 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:18,070 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 6, 'limit': 20}
+2026-06-11 14:56:18,082 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:18,088 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:18,223 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 7, 'limit': 20}
+2026-06-11 14:56:18,233 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:18,237 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:18,602 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 8, 'limit': 20}
+2026-06-11 14:56:18,618 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:18,625 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:18,851 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 9, 'limit': 20}
+2026-06-11 14:56:18,864 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:18,873 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:19,056 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 10, 'limit': 20}
+2026-06-11 14:56:19,069 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:19,076 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:19,268 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 11, 'limit': 20}
+2026-06-11 14:56:19,282 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:19,288 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:19,444 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 12, 'limit': 20}
+2026-06-11 14:56:19,458 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:19,464 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:19,616 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 13, 'limit': 20}
+2026-06-11 14:56:19,630 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:19,636 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:19,799 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 14, 'limit': 20}
+2026-06-11 14:56:19,823 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:19,828 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:20,018 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 15, 'limit': 20}
+2026-06-11 14:56:20,028 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:20,035 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:20,207 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 16, 'limit': 20}
+2026-06-11 14:56:20,216 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:20,221 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:21,767 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 17, 'limit': 20}
+2026-06-11 14:56:21,776 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:21,781 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:21,936 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 18, 'limit': 20}
+2026-06-11 14:56:21,945 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:21,954 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:22,094 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 19, 'limit': 20}
+2026-06-11 14:56:22,103 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:22,111 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:22,258 - INFO - {'event': 'rate_limit_increment', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 20, 'limit': 20}
+2026-06-11 14:56:22,266 - INFO - {'event': 'cache_hit', 'question': 'hello'}
+2026-06-11 14:56:22,272 - INFO - {'event': 'cache_hit', 'user_id': 1, 'question': 'hello'}
+2026-06-11 14:56:22,422 - WARNING - {'event': 'rate_limit_exceeded', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 20, 'limit': 20}
+2026-06-11 14:56:22,598 - WARNING - {'event': 'rate_limit_exceeded', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 20, 'limit': 20}
+2026-06-11 14:56:22,754 - WARNING - {'event': 'rate_limit_exceeded', 'key': 'rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI3NjEwNn0.WwkMona8bdwl_1ukvlhojt4h8V7W8DwphYsTuUsbUHQ', 'current_requests': 20, 'limit': 20}
