@@ -75,3 +75,13 @@
 2026-06-11 11:27:40,766 - INFO - Cache HIT user_id=1
 2026-06-11 11:27:41,381 - WARNING - Rate limit exceeded: rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI2MzYwMX0.ENdOUBdpeBA6r7b5vFQXdsqQBBDYxljhS7SwBIyPavo
 2026-06-11 11:27:45,210 - WARNING - Rate limit exceeded: rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI2MzYwMX0.ENdOUBdpeBA6r7b5vFQXdsqQBBDYxljhS7SwBIyPavo
+2026-06-11 12:48:48,298 - INFO - LLM initialized with retry and fallback support
+2026-06-11 12:49:40,448 - INFO - User logged in: test@gmail.com
+2026-06-11 12:50:17,435 - INFO - Cache MISS: hello
+2026-06-11 12:50:17,437 - INFO - Cache MISS user_id=1
+2026-06-11 12:50:17,438 - INFO - Chat request user_id=1
+2026-06-11 12:50:17,450 - INFO - Embedding Cache MISS
+2026-06-11 12:50:19,169 - INFO - Token usage user_id=1 input=986 output=13 total=999
+2026-06-11 12:50:19,173 - INFO - Chat completed user_id=1
+2026-06-11 12:50:56,271 - INFO - Cache HIT: hello
+2026-06-11 12:50:56,279 - INFO - Cache HIT user_id=1
