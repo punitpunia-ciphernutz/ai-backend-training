@@ -46,7 +46,11 @@ async def ask_question(
         )
 
         logger.info(
-            f"Cache HIT user_id={user_id}"
+            {
+                "event": "cache_hit",
+                "user_id": user_id,
+                "question": question
+            }
         )
 
         return cached_answer
@@ -61,11 +65,19 @@ async def ask_question(
     )
 
     logger.info(
-        f"Cache MISS user_id={user_id}"
+        {
+            "event": "cache_miss",
+            "user_id": user_id,
+            "question": question
+        }
     )
 
     logger.info(
-        f"Chat request user_id={user_id}"
+        {
+            "event": "chat_request",
+            "user_id": user_id,
+            "question": question
+        }
     )
 
     response = await rag_message_chain.ainvoke(
@@ -96,7 +108,10 @@ async def ask_question(
     )
 
     logger.info(
-        f"Chat completed user_id={user_id}"
+        {
+            "event": "chat_completed",
+            "user_id": user_id
+        }
     )
 
     return answer

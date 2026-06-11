@@ -59,10 +59,13 @@ def save_token_usage(
     db.add(log)
     db.commit()
     logger.info(
-    f"Token usage user_id={user_id} "
-    f"input={input_tokens} "
-    f"output={output_tokens} "
-    f"total={total_tokens}"
-)
+        {
+            "event": "token_usage",
+            "user_id": user_id,
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "total_tokens": total_tokens
+        }
+    )
 
     return log

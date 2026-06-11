@@ -7,11 +7,17 @@ def get_cached_response(question):
 
     if response:
         logger.info(
-            f"Cache HIT: {question}"
+            {
+                "event": "cache_hit",
+                "question": question
+            }
         )
     else:
         logger.info(
-            f"Cache MISS: {question}"
+            {
+                "event": "cache_miss",
+                "question": question
+            }
         )
 
     return response

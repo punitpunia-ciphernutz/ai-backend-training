@@ -30,7 +30,12 @@ def register_user(data):
 
     db.commit()
 
-    logger.info(f"User registered: {user.email}")
+    logger.info(
+        {
+            "event": "user_registered",
+            "email": data.email
+        }
+    )
 
     db.close()
 
@@ -45,7 +50,12 @@ def login_user(user):
         }
     )
 
-    logger.info(f"User logged in: {user.email}")
+    logger.info(
+        {
+            "event": "user_login",
+            "email": user.email
+        }
+    )
 
     return {
         "access_token": token,
@@ -64,7 +74,13 @@ def authenticate_user(data):
 
     if not user:
         
-        logger.warning(f"Failed login attempt: {data.email}")
+        logger.warning(
+            {
+                "event": "registration_failed",
+                "email": data.email,
+                "reason": "email_already_exists"
+            }
+        )
         
         raise HTTPException(
             status_code=401,
@@ -75,7 +91,13 @@ def authenticate_user(data):
         data.password,
         user.password
     ):
-        logger.warning(f"Failed login attempt: {data.email}")
+        logger.warning(
+            {
+                "event": "login_failed",
+                "email": data.email,
+                "reason": "invalid_credentials"
+            }
+        )
         
         raise HTTPException(
             status_code=401,

@@ -16,7 +16,13 @@ def upload_document(file):
     vector_db.add_documents(
         docs
     )
-    logger.info(f"Document uploaded: {file.filename}")
+    logger.info(
+        {
+            "event": "document_uploaded",
+            "filename": file.filename,
+            "chunks": len(docs)
+        }
+    )
 
     return {
         "chunks": len(docs),
