@@ -28,3 +28,50 @@
 2026-06-11 10:44:58,016 - INFO - Document uploaded: demo.txt
 2026-06-11 10:45:03,321 - INFO - Embedding Cache HIT
 2026-06-11 10:45:03,352 - INFO - Document uploaded: demo.txt
+2026-06-11 11:26:41,077 - INFO - User logged in: test@gmail.com
+2026-06-11 11:27:25,956 - INFO - Cache MISS: hello
+2026-06-11 11:27:25,959 - INFO - Cache MISS user_id=1
+2026-06-11 11:27:25,959 - INFO - Chat request user_id=1
+2026-06-11 11:27:25,968 - INFO - Embedding Cache MISS
+2026-06-11 11:27:27,463 - INFO - Token usage user_id=1 input=586 output=13 total=599
+2026-06-11 11:27:27,468 - INFO - Chat completed user_id=1
+2026-06-11 11:27:29,647 - INFO - Cache HIT: hello
+2026-06-11 11:27:29,652 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:31,006 - INFO - Cache HIT: hello
+2026-06-11 11:27:31,013 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:31,867 - INFO - Cache HIT: hello
+2026-06-11 11:27:31,871 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:32,408 - INFO - Cache HIT: hello
+2026-06-11 11:27:32,416 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:32,931 - INFO - Cache HIT: hello
+2026-06-11 11:27:32,935 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:33,617 - INFO - Cache HIT: hello
+2026-06-11 11:27:33,624 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:34,364 - INFO - Cache HIT: hello
+2026-06-11 11:27:34,370 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:34,870 - INFO - Cache HIT: hello
+2026-06-11 11:27:34,877 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:35,436 - INFO - Cache HIT: hello
+2026-06-11 11:27:35,447 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:35,857 - INFO - Cache HIT: hello
+2026-06-11 11:27:35,864 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:36,331 - INFO - Cache HIT: hello
+2026-06-11 11:27:36,340 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:36,850 - INFO - Cache HIT: hello
+2026-06-11 11:27:36,855 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:37,310 - INFO - Cache HIT: hello
+2026-06-11 11:27:37,316 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:37,857 - INFO - Cache HIT: hello
+2026-06-11 11:27:37,864 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:38,483 - INFO - Cache HIT: hello
+2026-06-11 11:27:38,490 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:39,060 - INFO - Cache HIT: hello
+2026-06-11 11:27:39,069 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:39,611 - INFO - Cache HIT: hello
+2026-06-11 11:27:39,622 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:40,177 - INFO - Cache HIT: hello
+2026-06-11 11:27:40,185 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:40,756 - INFO - Cache HIT: hello
+2026-06-11 11:27:40,766 - INFO - Cache HIT user_id=1
+2026-06-11 11:27:41,381 - WARNING - Rate limit exceeded: rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI2MzYwMX0.ENdOUBdpeBA6r7b5vFQXdsqQBBDYxljhS7SwBIyPavo
+2026-06-11 11:27:45,210 - WARNING - Rate limit exceeded: rate_limit:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImV4cCI6MTc4MTI2MzYwMX0.ENdOUBdpeBA6r7b5vFQXdsqQBBDYxljhS7SwBIyPavo

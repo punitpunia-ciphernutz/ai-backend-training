@@ -10,17 +10,16 @@ from src.api.chat import (
 )
 from src.models.token_log import TokenLog
 from src.core.cache import cache
+from src.core.rate_limiter import (
+    rate_limit_middleware
+)
 
 app = FastAPI()
 
-cache.set(
-    "redis_test",
-    "working"
+app.middleware("http")(
+    rate_limit_middleware
 )
 
-print(
-    cache.get("redis_test")
-)
 
 Base.metadata.create_all(bind=engine)
 
